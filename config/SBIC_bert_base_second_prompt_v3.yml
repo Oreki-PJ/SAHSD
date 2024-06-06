@@ -1,0 +1,37 @@
+task_name: SBIC_v2_prompt_v3
+train_path: data/SBIC/n_sample/
+dev_path: data/SBIC/dev_data_pp50_with_senti_pre.csv
+test_path: data/SBIC/test_data_pp50_with_senti_pre.csv
+task_type: binary
+
+# Pretrained model path or name
+pretrain_model: output/T4SA_pp50_bert_base/
+
+# Output
+output_dir: output/SBIC_pp50_batch16_prompt_v3/
+log_file: SBIC.log
+pred_file: SBIC.npy  # save predicted label ids
+
+# Prompt
+pet_method: skip_second  # skip_first, skip_second
+full_vocab_loss: yes
+# encoder_type: none  # emb, mlp, lstm, none
+
+# Train & evaluation
+use_gpu: yes
+# max_seq_len: 128
+max_seq_len: 512
+# seed: 3407  # random seed for training
+shuffle: yes  # whether shuffle order of training samples
+train_batch_size: 16
+grad_acc_steps: 1
+eval_every_steps: 10  # evaluation after weight update steps
+test_batch_size: 16
+warmup_ratio: 0.05
+weight_decay: 0.01
+learning_rate: 1.0e-5
+adam_epsilon: 1.0e-8
+max_grad_norm: 1.0
+max_train_epochs: 10
+early_stop_steps: 3
+save_metric: 'f1_score'

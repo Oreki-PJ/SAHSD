@@ -1,0 +1,38 @@
+task_name: ethos
+random_seed: 9999
+# train_path: data/SBIC/n_sample/
+# dev_path: data/SBIC/dev_data.csv
+test_path: data/ethos/test_data_with_senti_pre.csv
+task_type: binary
+
+# Pretrained model path or name
+trained_model: output/SBIC_pp50_batch16/
+
+# Output
+output_dir: output/Ethos_bert_base_test/
+log_file: Ethos.log
+pred_file: Ethos.npy  # save predicted label ids
+
+# Prompt
+pet_method: skip_second  # skip_first, skip_second
+full_vocab_loss: yes
+# encoder_type: none  # emb, mlp, lstm, none
+
+# Train & evaluation
+use_gpu: yes
+# max_seq_len: 128
+max_seq_len: 512
+seed: 3407  # random seed for training
+shuffle: yes  # whether shuffle order of training samples
+train_batch_size: 4
+grad_acc_steps: 1
+eval_every_steps: 20  # evaluation after weight update steps
+test_batch_size: 32
+warmup_ratio: 0.05
+weight_decay: 0.01
+learning_rate: 2.0e-5
+adam_epsilon: 1.0e-8
+max_grad_norm: 1.0
+max_train_epochs: 20
+early_stop_steps: 5
+save_metric: 'f1_score'

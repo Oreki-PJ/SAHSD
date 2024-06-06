@@ -1,0 +1,37 @@
+task_name: T4SA
+train_path: data/T4SA/pp50/train_data.csv
+dev_path: data/T4SA/pp50/test_data.csv
+test_path: data/T4SA/pp50/test_data.csv
+task_type: multiclass
+
+# Pretrained model path or name
+pretrain_model: bert-base-uncased
+
+# Output
+output_dir: output/T4SA_pp50_bert_base/
+log_file: T4SA.log
+pred_file: T4SA_pred.npy  # save predicted label ids
+label_file: T4SA_label.npy  # save predicted label ids
+
+# Prompt
+pet_method: skip_first  # skip_first, skip_second
+full_vocab_loss: yes
+# encoder_type: none  # emb, mlp, lstm, none
+
+# Train & evaluation
+use_gpu: yes
+max_seq_len: 512
+seed: 3407  # random seed for training
+shuffle: yes  # whether shuffle order of training samples
+train_batch_size: 32
+grad_acc_steps: 1
+eval_every_steps: 200  # evaluation after weight update steps
+test_batch_size: 32
+warmup_ratio: 0.05
+weight_decay: 0.01
+learning_rate: 2.0e-5
+adam_epsilon: 1.0e-8
+max_grad_norm: 1.0
+max_train_epochs: 5
+early_stop_steps: 5
+save_metric: 'f1_score'
